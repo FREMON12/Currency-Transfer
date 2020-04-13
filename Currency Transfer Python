@@ -1,0 +1,57 @@
+import requests
+import json
+
+import config
+
+url_us = "http://www.floatrates.com/daily/usd.json"
+url_eu = 'http://www.floatrates.com/daily/eur.json'
+url_ua = 'http://www.floatrates.com/daily/uah.json'
+url_ru = 'http://www.floatrates.com/daily/rub.json'
+
+
+def chang_url(val):
+    response = requests.get(val)
+    data = response.text
+    parsed = json.loads(data)
+    return parsed
+
+
+def get_currency_ru(url, val):
+    return chang_url(url)[val]['rate']
+
+
+# Перевод долларов
+print('Перевод долларов: 1')
+usd_uah = 'uah'
+print(get_currency_ru(url_us, usd_uah))
+usd_eur = 'eur'
+print(get_currency_ru(url_us, usd_eur))
+usd_rub = 'rub'
+print(get_currency_ru(url_us, usd_rub))
+
+# Перевод гривней
+print('Перевод гривней: 1')
+uah_usd = 'usd'
+print(get_currency_ru(url_ua, uah_usd))
+uah_ru = 'rub'
+print(get_currency_ru(url_ua, uah_ru))
+uah_eu = 'eur'
+print(get_currency_ru(url_ua, uah_eu))
+
+#Перевод рублей
+print('Перевод рублей: 1')
+ru_usd = 'usd'
+print(get_currency_ru(url_ru, ru_usd))
+ru_ua = 'uah'
+print(get_currency_ru(url_ru, ru_ua))
+ru_eu = 'eur'
+print(get_currency_ru(url_ru, ru_eu))
+
+#Перевод евро
+print('Перевод евро: 1')
+eu_usd = 'usd'
+print(get_currency_ru(url_eu, eu_usd))
+eu_ru = 'rub'
+print(get_currency_ru(url_eu, eu_ru))
+eu_ua = 'uah'
+print(get_currency_ru(url_eu, eu_ua))
